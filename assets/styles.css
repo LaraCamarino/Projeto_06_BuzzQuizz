@@ -3,7 +3,8 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;;
+    font-family: 'Roboto', sans-serif;
+    background: #FAFAFA;
 }
 
 .titulo {
@@ -21,4 +22,104 @@ body {
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 1;
+}
+
+.meus-quizzes-vazio {
+    margin: 146px auto 0 auto;
+    height: 181px;
+    width: 1050px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+    padding: 33px 0;
+}
+
+.meus-quizzes-vazio div:first-child {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #B9B9B9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.meus-quizzes-vazio div:last-child {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    color: #EC362D;
+    padding: 5px 20px;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+}
+
+.meus-quizzes {
+    margin: 140px auto 0 auto;
+    height: 217px;
+    width: 1050px;
+}
+
+.sub-titulo {
+    display: flex;
+    align-items: center;
+}
+
+.sub-titulo h3 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+
+.sub-titulo ion-icon {
+    margin-left: 17px;
+    font-size: 35px;
+    color: #EC362D;
+}
+
+.quizzes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.quizz {
+    width: 340px;
+    height: 181px;
+    margin-top: 15px;
+    position: relative;
+    word-break: break-word;
+}
+
+.quizz img {
+    width: 340px;
+    height: 181px;
+    border-radius: 5px;
+    /*fazer degrade na imagem*/
+}
+
+.quizz h3 {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #ffffff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 25px 17px 17px;
+}
+
+.todos-quizzes {
+    margin: 60px auto 200px auto;
+    width: 1050px;
+}
+
+.escondido {
+    display: none;
 }
