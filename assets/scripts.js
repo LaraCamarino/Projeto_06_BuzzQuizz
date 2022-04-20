@@ -1,5 +1,5 @@
 function teste() {
-    if(true){
-    console.log("testee");
+    if(!false) {
+        console.log("testee");
     }
 }
