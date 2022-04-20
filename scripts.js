@@ -1,12 +1,5 @@
-console.log("teste");
-
-function teste() {
-    if (true) {
-        console.log("testeee");
+function testando() {
+    if(!false) {
+        console.log("?");
     }
-function teste2() {
-    console.log("teste");
-    
 }
-
-console.log("testando");
