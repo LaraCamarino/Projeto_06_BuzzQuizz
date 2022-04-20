@@ -22,3 +22,130 @@ body {
     top: 0;
     right: 0;
 }
+
+.conteiner {
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tituloQuiz {
+    width: 100%;
+    height: 227px;
+    margin-top: 69px;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 39px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.caixaPergunta {
+    width: 759px;
+    height: 676px;
+    padding: 28px 34px;
+    background-color: #FFFFFF;
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tituloPergunta {
+    width: 688.16px;
+    height: 137.99px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #434CA0;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.caixaOpcoes {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.opcao {
+    margin-bottom: 18px;
+    
+}
+
+.opcao img {
+    width: 329.91px;
+    height: 175.2px;
+    margin-bottom: 7px;
+}
+
+.opcao p {
+    font-size: 20px;
+    font-weight: 700;
+    word-break: break-all;
+}
+
+.caixaResultado {
+    width: 759px;
+    height: 430px;
+    padding: 18px;
+    background-color: #FFFFFF;
+    margin-top: 44px;
+    margin-bottom: 57px;
+}
+
+.tituloResultado {
+    width: 727px;
+    height: 99px;
+    margin-bottom: 18px;
+    background-color: #EC362D;
+    font-size: 23px;
+    font-weight: 700, Bold;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudoResultado {
+    display: flex;
+}
+
+.conteudoResultado img {
+    width: 364px;
+    height: 273px;
+    margin-right: 21px;
+}
+
+.conteudoResultado p {
+    font-size: 19px;
+    font-weight: 700;
+    word-break: break-all;
+}
+
+.reininciar button {
+    width: 260.38px;
+    height: 52px;
+    border: 0px;
+    border-radius: 15px;
+    background-color: #EC362D;
+    font-size: 21px;
+    color: #FFF5F4;
+    margin-bottom: 16px;
+}
+
+.voltarHome button {
+    width: 260.38px;
+    height: 52px;
+    border: 0px;
+    border-radius: 15px;
+    background-color: #E5E5E5;
+    font-size: 21px;
+    color: #818181;
+    margin-bottom: 85px;
+}
