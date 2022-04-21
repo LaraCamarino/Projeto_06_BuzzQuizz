@@ -155,6 +155,7 @@ body {
     height: 676px;
     padding: 28px 34px;
     background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin-top: 42px;
     display: flex;
     flex-direction: column;
@@ -211,6 +212,7 @@ body {
     height: 430px;
     padding: 18px;
     background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin-top: 44px;
     margin-bottom: 57px;
 }
@@ -271,3 +273,4 @@ body {
 .escondido {
     display: none;
 }
+
