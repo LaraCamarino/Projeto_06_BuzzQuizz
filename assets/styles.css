@@ -121,7 +121,6 @@ body {
 }
 
 .conteiner-quiz {
-    background-color: #E5E5E5;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,13 +130,24 @@ body {
     width: 100%;
     height: 227px;
     margin-top: 69px;
-    background-color:#43932e;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.titulo-quiz img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-quiz h1 {
     font-size: 39px;
     font-weight: 400;
     color: #FFFFFF;
+    position: absolute;
+    align-self: center;
 }
 
 .caixa-pergunta {
@@ -193,7 +203,7 @@ body {
 .opcao p {
     font-size: 20px;
     font-weight: 700;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .caixa-resultado {
@@ -211,7 +221,7 @@ body {
     margin-bottom: 18px;
     background-color: #EC362D;
     font-size: 23px;
-    font-weight: 700, Bold;
+    font-weight: 700;
     color: #FFFFFF;
     display: flex;
     justify-content: center;
@@ -229,9 +239,11 @@ body {
 }
 
 .conteudo-resultado p {
-    font-size: 19px;
     font-weight: 700;
-    word-break: break-all;
+    font-size: 19px;
+    line-height: 25px;
+    color: #484848;
+    word-break: break-word;
 }
 
 .reininciar button {
@@ -250,7 +262,7 @@ body {
     height: 52px;
     border: 0px;
     border-radius: 15px;
-    background-color: #E5E5E5;
+    background-color: inherit;
     font-size: 21px;
     color: #818181;
     margin-bottom: 85px;
