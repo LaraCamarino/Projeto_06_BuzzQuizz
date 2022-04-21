@@ -7,7 +7,8 @@
     <title>BuzzQuizz</title>
 
     <link rel="stylesheet" href="assets/reset.css" />
-    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/styles-paginas1e2.css" />
+    <link rel="stylesheet" href="assets/styles-pagina3.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,21 +18,21 @@
     
     <header class="titulo">BuzzQuizz</header> 
 
-    <div class="pagina1">
+    <div class="pagina1 escondido">
         <section class="meus-quizzes-vazio">
             <div>
                 <p>Você não criou nenhum</p>
                 <p>quizz ainda :(</p>
             </div>
             <div>
-                <h4>Criar Quizz</h4>
+                <h4 onclick="irCriarQuizz()">Criar Quizz</h4>
             </div>
         </section>
 
         <section class="meus-quizzes escondido">
             <div class="sub-titulo">
                 <h3>Seus Quizzes</h3>
-                <ion-icon name="add-circle"></ion-icon>
+                <ion-icon onclick="irCriarQuizz()" name="add-circle"></ion-icon>
             </div>
             <div class="quizzes">
                 <div class="quizz">
@@ -144,6 +145,123 @@
                     <button>Voltar pra home</button>
             </div>
         </div>
+    </div>
+
+    <div class="pagina3-inputs escondido">
+    </div>
+
+    <div class="pagina3-perguntas">
+        <h2>Crie suas perguntas</h2>
+
+        <section class="perguntas">
+            <div class="pergunta">
+                <div class="topo-pergunta">
+                    <h2>Pergunta 1</h2>
+                </div>
+                <div class="conteudo-pergunta">
+                    <div class="texto-pergunta">
+                        <input type="text" placeholder="Texto da pergunta">
+                        <input type="text" placeholder="Cor de fundo da pergunta">
+                    </div>
+                    <div class="resposta-correta">
+                        <h2>Resposta correta</h2>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                    </div>
+                    <div class="respostas-incorretas">
+                        <h2>Respostas incorretas</h2>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 2">
+                            <input type="text" placeholder="URL da imagem 2">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 3">
+                            <input type="text" placeholder="URL da imagem 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <div class="topo-pergunta">
+                    <h2>Pergunta 2</h2>
+                    <ion-icon onclick="abrirConteudoPergunta(this)" name="create-outline"></ion-icon>
+                </div>
+                <div class="conteudo-pergunta escondido">
+                    <div class="texto-pergunta">
+                        <input type="text" placeholder="Texto da pergunta">
+                        <input type="text" placeholder="Cor de fundo da pergunta">
+                    </div>
+                    <div class="resposta-correta">
+                        <h2>Resposta correta</h2>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                    </div>
+                    <div class="respostas-incorretas">
+                        <h2>Respostas incorretas</h2>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 2">
+                            <input type="text" placeholder="URL da imagem 2">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 3">
+                            <input type="text" placeholder="URL da imagem 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pergunta">
+                <div class="topo-pergunta">
+                    <h2>Pergunta 3</h2>
+                    <ion-icon onclick="abrirConteudoPergunta(this)" name="create-outline"></ion-icon>
+                </div>
+                <div class="conteudo-pergunta">
+                    <div class="texto-pergunta">
+                        <input type="text" placeholder="Texto da pergunta">
+                        <input type="text" placeholder="Cor de fundo da pergunta">
+                    </div>
+                    <div class="resposta-correta">
+                        <h2>Resposta correta</h2>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                    </div>
+                    <div class="respostas-incorretas">
+                        <h2>Respostas incorretas</h2>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 2">
+                            <input type="text" placeholder="URL da imagem 2">
+                        </div>
+                        <div class="resposta-incorreta">
+                            <input type="text" placeholder="Resposta incorreta 3">
+                            <input type="text" placeholder="URL da imagem 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h3>Prosseguir pra criar níveis</h3>
+    </div>
+
+    <div class="pagina3-niveis escondido">
+
+    </div>
+
+    <div class="pagina3-sucesso escondido">
+
     </div>
 
 
