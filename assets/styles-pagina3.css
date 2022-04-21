@@ -1,10 +1,10 @@
-.pagina3-perguntas {
+.pagina3-perguntas, .pagina3-niveis {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.pagina3-perguntas > h2 {
+.pagina3-perguntas > h2, .pagina3-niveis > h2 {
     margin-top: 132px;
     margin-bottom: 36px;
     font-weight: 700;
@@ -12,7 +12,7 @@
     line-height: 27px;
 }
 
-.perguntas {
+.perguntas, .niveis {
     width: 600px;
     margin-bottom: 70px;
 }
@@ -24,17 +24,24 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
+.nivel {
+    padding: 27px 20px 27px 17px;
+    margin-bottom: 24px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
 .texto-pergunta, .resposta-correta {
     margin-bottom: 28px;
 }
 
-.pergunta h2 {
+.pergunta h2, .nivel h2 {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
 }
 
-.pergunta input {
+.pergunta input, .nivel input {
     margin-top: 14px;
     width: 100%;
     height: 46px;
@@ -46,18 +53,18 @@
     line-height: 22px;
 }
 
-.pergunta input::placeholder {
+.pergunta input::placeholder, .nivel input::placeholder {
     font-style: italic;
     color: #BABABA;    
 }
 
-.topo-pergunta {
+.topo-pergunta, .topo-nivel {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.topo-pergunta ion-icon {
+.topo-pergunta ion-icon, .topo-nivel ion-icon {
     font-size: 28px;
 }
 
@@ -69,7 +76,7 @@
     margin-bottom: 0;
 }
 
-.pagina3-perguntas h3 {
+.pagina3-perguntas h3, .pagina3-niveis h3 {
     margin-bottom: 200px;
     font-weight: 400;
     font-size: 21px;
@@ -77,5 +84,13 @@
     color: #FFF5F4;
     background-color: #EC362D;
     border-radius: 15px;
-    padding: 15px 55px;
+    width: 324px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.escondido {
+    display: none;
 }

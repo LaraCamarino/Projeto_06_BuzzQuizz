@@ -150,114 +150,64 @@
     <div class="pagina3-inputs escondido">
     </div>
 
-    <div class="pagina3-perguntas">
+    <div class="pagina3-perguntas escondido">
         <h2>Crie suas perguntas</h2>
 
         <section class="perguntas">
-            <div class="pergunta">
-                <div class="topo-pergunta">
-                    <h2>Pergunta 1</h2>
+         
+        </section>
+
+        <h3 onclick="irCriarNiveis()">Prosseguir pra criar níveis</h3>
+    </div>
+
+    <div class="pagina3-niveis">
+        <h2>Agora, decida os níveis</h2>
+
+        <section class="niveis">
+            <div class="nivel">
+                <div class="topo-nivel">
+                    <h2>Nível 1</h2>
                 </div>
-                <div class="conteudo-pergunta">
-                    <div class="texto-pergunta">
-                        <input type="text" placeholder="Texto da pergunta">
-                        <input type="text" placeholder="Cor de fundo da pergunta">
-                    </div>
-                    <div class="resposta-correta">
-                        <h2>Resposta correta</h2>
-                        <input type="text" placeholder="Resposta correta">
-                        <input type="text" placeholder="URL da imagem">
-                    </div>
-                    <div class="respostas-incorretas">
-                        <h2>Respostas incorretas</h2>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 2">
-                            <input type="text" placeholder="URL da imagem 2">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 3">
-                            <input type="text" placeholder="URL da imagem 3">
-                        </div>
+                <div class="conteudo-nivel">
+                    <div class="texto-nivel">
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima">
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" placeholder="Descrição do nível">
                     </div>
                 </div>
             </div>
-
-            <div class="pergunta">
-                <div class="topo-pergunta">
-                    <h2>Pergunta 2</h2>
-                    <ion-icon onclick="abrirConteudoPergunta(this)" name="create-outline"></ion-icon>
+            <div class="nivel">
+                <div class="topo-nivel">
+                    <h2>Nível 2</h2>
+                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
                 </div>
-                <div class="conteudo-pergunta escondido">
-                    <div class="texto-pergunta">
-                        <input type="text" placeholder="Texto da pergunta">
-                        <input type="text" placeholder="Cor de fundo da pergunta">
-                    </div>
-                    <div class="resposta-correta">
-                        <h2>Resposta correta</h2>
-                        <input type="text" placeholder="Resposta correta">
-                        <input type="text" placeholder="URL da imagem">
-                    </div>
-                    <div class="respostas-incorretas">
-                        <h2>Respostas incorretas</h2>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 2">
-                            <input type="text" placeholder="URL da imagem 2">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 3">
-                            <input type="text" placeholder="URL da imagem 3">
-                        </div>
+                <div class="conteudo-nivel">
+                    <div class="texto-nivel">
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima">
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" placeholder="Descrição do nível">
                     </div>
                 </div>
             </div>
-
-            <div class="pergunta">
-                <div class="topo-pergunta">
-                    <h2>Pergunta 3</h2>
-                    <ion-icon onclick="abrirConteudoPergunta(this)" name="create-outline"></ion-icon>
+            <div class="nivel">
+                <div class="topo-nivel">
+                    <h2>Nível 3</h2>
+                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
                 </div>
-                <div class="conteudo-pergunta">
-                    <div class="texto-pergunta">
-                        <input type="text" placeholder="Texto da pergunta">
-                        <input type="text" placeholder="Cor de fundo da pergunta">
-                    </div>
-                    <div class="resposta-correta">
-                        <h2>Resposta correta</h2>
-                        <input type="text" placeholder="Resposta correta">
-                        <input type="text" placeholder="URL da imagem">
-                    </div>
-                    <div class="respostas-incorretas">
-                        <h2>Respostas incorretas</h2>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 2">
-                            <input type="text" placeholder="URL da imagem 2">
-                        </div>
-                        <div class="resposta-incorreta">
-                            <input type="text" placeholder="Resposta incorreta 3">
-                            <input type="text" placeholder="URL da imagem 3">
-                        </div>
+                <div class="conteudo-nivel">
+                    <div class="texto-nivel">
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima">
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" placeholder="Descrição do nível">
                     </div>
                 </div>
             </div>
         </section>
 
-        <h3>Prosseguir pra criar níveis</h3>
-    </div>
-
-    <div class="pagina3-niveis escondido">
-
+        <h3 onclick="irSucesso()">Finalizar Quizz</h3>
     </div>
 
     <div class="pagina3-sucesso escondido">
