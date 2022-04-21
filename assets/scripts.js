@@ -1,7 +1,7 @@
-let tituloQuizz = "Título do Quizz por enquanto";
-let urlImagem = "https://images.ecycle.com.br/wp-content/uploads/2021/05/20195924/o-que-e-paisagem.jpg"
-let numeroDePerguntas = 2;
-let numeroDeNiveis = 4;
+let tituloQuizz;
+let urlImagem;
+let numeroDePerguntas;
+let numeroDeNiveis;
 
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
@@ -13,12 +13,38 @@ function irCriarQuizz() {
 }
 
 function irCriarPerguntas() {
-    const pagina3Inputs = document.querySelector(".pagina3-inputs");
-    const pagina3Perguntas = document.querySelector(".pagina3-perguntas");
-    pagina3Inputs.classList.add("escondido");
-    pagina3Perguntas.classList.remove("escondido");
+    if (validacaoInformacoesBasicas()) {
+        const pagina3Inputs = document.querySelector(".pagina3-inputs");
+        const pagina3Perguntas = document.querySelector(".pagina3-perguntas");
+        pagina3Inputs.classList.add("escondido");
+        pagina3Perguntas.classList.remove("escondido");
+        
+        prepararPerguntas();
+    } else {
+        alert("Por favor, preencha os dados corretamente!");
+    }
+}
 
-    prepararPerguntas();
+function validacaoInformacoesBasicas() {
+    tituloQuizz = document.getElementById("titulo-quizz").value;
+    urlImagem = document.getElementById("titulo-imagem").value;
+    numeroDePerguntas = document.getElementById("quantidade-perguntas").value;
+    numeroDeNiveis = document.getElementById("quantidade-niveis").value;
+
+    if(tituloQuizz.length < 20 || tituloQuizz.length > 65) {
+        return false;
+    }
+    if(verificaUrl(urlImagem) === false) {
+        return false;
+    }
+    if(numeroDePerguntas < 3) {
+        return false;
+    }
+    if(numeroDeNiveis < 2) {
+        return false;
+    }
+
+    return true;
 }
 
 function prepararPerguntas() {
@@ -107,6 +133,8 @@ function irCriarNiveis() {
         const pagina3Niveis = document.querySelector(".pagina3-niveis");
         pagina3Perguntas.classList.add("escondido");
         pagina3Niveis.classList.remove("escondido");
+
+        prepararNiveis();
     } else {
         alert("Por favor, preencha os dados corretamente!");
     }
@@ -226,4 +254,39 @@ function verificaUrl(url) {
     }
 }
 
-prepararPerguntas();
+function prepararNiveis() {
+    const containerNiveis = document.querySelector(".niveis");
+    containerNiveis.innerHTML = "";
+    containerNiveis.innerHTML += `
+        <div class="nivel">
+            <div class="topo-nivel">
+                <h2>Nível 1</h2>
+            </div>
+            <div class="conteudo-nivel">
+                <div class="texto-nivel">
+                    <input type="text" placeholder="Título do nível">
+                    <input type="text" placeholder="% de acerto mínima">
+                    <input type="text" placeholder="URL da imagem do nível">
+                    <input type="text" placeholder="Descrição do nível">
+                </div>
+            </div>
+        </div>`
+    for (let i = 2; i <= numeroDeNiveis; i++) {
+        containerNiveis.innerHTML += `
+            <div class="nivel">
+                <div class="topo-nivel">
+                    <h2>Nível ${i}</h2>
+                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
+                </div>
+                <div class="conteudo-nivel">
+                    <div class="texto-nivel">
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima">
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" placeholder="Descrição do nível">
+                    </div>
+                </div>
+            </div>`
+    }
+}
+

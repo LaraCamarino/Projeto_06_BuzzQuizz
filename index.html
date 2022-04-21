@@ -147,7 +147,18 @@
         </div>
     </div>
 
-    <div class="pagina3-inputs escondido">
+    <div class="pagina3-inputs">
+        <h2>Comece pelo começo</h2>
+
+        <div class="informacoes-basicas">
+            <input type="text" id="titulo-quizz" placeholder="Título do seu quizz">
+            <input type="text" id="titulo-imagem" placeholder="URL da imagem do seu quizz">
+            <input type="text" id="quantidade-perguntas" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" id="quantidade-niveis" placeholder="Quantidade de níveis do quizz"> 
+        </div>
+        <div class="prosseguir-para-perguntas">
+            <button onclick="irCriarPerguntas()">Prosseguir pra criar perguntas</button>
+        </div>
     </div>
 
     <div class="pagina3-perguntas escondido">
@@ -160,51 +171,11 @@
         <h3 onclick="irCriarNiveis()">Prosseguir pra criar níveis</h3>
     </div>
 
-    <div class="pagina3-niveis">
+    <div class="pagina3-niveis escondido">
         <h2>Agora, decida os níveis</h2>
 
         <section class="niveis">
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 1</h2>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 2</h2>
-                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 3</h2>
-                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
+           
         </section>
 
         <h3 onclick="irSucesso()">Finalizar Quizz</h3>
