@@ -19,7 +19,7 @@ function validacaoInformacoesBasicas() {
         alert("O título deve conter entre 20 e 65 caracteres.");
     }
     if(verificaUrl(tituloImagem) === false) {
-        alert("O endereço da imagem não é válido");
+        alert("O endereço da imagem não é válido.");
     }
     if(quantidadePerguntas < 3) {
         alert("O quizz deve conter no mínimo 3 perguntas.");
@@ -38,5 +38,25 @@ function verificaUrl(url) {
     }
     else {
         return false;
+    }
+}
+
+function validacaoNiveis() {
+    let tituloNivel = document.getElementById("titulo-nivel").value;
+    let porcentagemNivel = document.getElementById("porcentagem-nivel").value;
+    let imagemNivel = document.getElementById("imagem-nivel").value;
+    let descricaoNivel = document.getElementById("descrição-nivel").value;
+
+    if(tituloNivel < 10 ) {
+        alert("O título deve conter no mínimo 10 caracteres.");
+    }
+    if(porcentagemNivel < 0 || porcentagemNivel > 100) {
+        alert("A porcentagem deve ser um número de 0 a 100.");
+    }
+    if(verificaUrl(imagemNivel) === false) {
+        alert("O endereço da imagem não é válido.");
+    }
+    if(descricaoNivel < 30) {
+        alert("A descrição deve conter no mínimo 30 caracteres.");
     }
 }
