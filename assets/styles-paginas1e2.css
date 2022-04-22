@@ -97,11 +97,26 @@ body {
     word-break: break-word;
 }
 
+.degrade {
+    position: relative;
+}
+
+.degrade::after {
+    content: '';
+    width: 100%;
+    height: 99%;
+    border-radius: 5px;
+    background: linear-gradient(to top, black 0%,rgba(0, 0, 0, 0) 100%);
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .quizz img {
     width: 340px;
     height: 181px;
     border-radius: 5px;
-    /*fazer degrade na imagem*/
 }
 
 .quizz h3 {
