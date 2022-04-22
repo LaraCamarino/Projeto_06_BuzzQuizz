@@ -316,6 +316,10 @@ function validacaoNiveis() {
 
 function irSucesso() {
     if (validacaoNiveis()) {
+        const pagina3Niveis = document.querySelector(".pagina3-niveis");
+        const pagina3Sucesso = document.querySelector(".pagina3-sucesso");
+        pagina3Niveis.classList.add("escondido");
+        pagina3Sucesso.classList.remove("escondido");
         
     } else {
         alert("Por favor, preencha os dados corretamente!");
