@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <title>BuzzQuizz</title>
 
+    <link rel="icon" href="/images/icon_quizz.png">
+
+
     <link rel="stylesheet" href="assets/reset.css" />
     <link rel="stylesheet" href="assets/styles-paginas1e2.css" />
     <link rel="stylesheet" href="assets/styles-pagina3.css" />
@@ -18,7 +21,7 @@
     
     <header class="titulo">BuzzQuizz</header> 
 
-    <div class="pagina1 escondido">
+    <div class="pagina1">
         <section class="meus-quizzes-vazio">
             <div>
                 <p>Você não criou nenhum</p>
@@ -103,7 +106,9 @@
 
     <div class="pagina2 escondido">
         <header class="titulo-quiz">
-            <img src="images/Rectangle 36.png" />
+            <div class="overlay-preto">
+                <img src="images/Rectangle 36.png" />
+            </div>
             <h1>O quão Potterhead é você?</h1>
         </header>
         <div class="conteiner-quiz">
@@ -160,7 +165,7 @@
                     <button>Reiniciar Quizz</button>
             </div>
             <div class="voltar-home">
-                    <button>Voltar pra home</button>
+                    <button onclick="voltarHome()">Voltar pra home</button>
             </div>
         </div>
     </div>
@@ -189,51 +194,11 @@
         <h3 onclick="irCriarNiveis()">Prosseguir pra criar níveis</h3>
     </div>
 
-    <div class="pagina3-niveis ">
+    <div class="pagina3-niveis escondido">
         <h2>Agora, decida os níveis</h2>
 
         <section class="niveis">
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 1</h2>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" id="titulo-nivel" placeholder="Título do nível">
-                        <input type="text" id="porcentagem-nivel" placeholder="% de acerto mínima">
-                        <input type="text" id="imagem-nivel" placeholder="URL da imagem do nível">
-                        <input type="text" id="descrição-nivel" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 2</h2>
-                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
-            <div class="nivel">
-                <div class="topo-nivel">
-                    <h2>Nível 3</h2>
-                    <ion-icon onclick="abrirConteudoNivel(this)" name="create-outline"></ion-icon>
-                </div>
-                <div class="conteudo-nivel">
-                    <div class="texto-nivel">
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
+            
         </section>
 
         <h3 onclick="irSucesso()">Finalizar Quizz</h3>
@@ -241,18 +206,16 @@
 
     <div class="pagina3-sucesso escondido">
         <h2>Seu quizz está pronto!</h2>
-        <div class="quizz-criado">
-            <div class="degrade">
-                <img src="images/Rectangle 36.png" />
-            </div>
-            <h3>O quão Potterhead é você?</h3>
-        </div>
+        
+        <section class="quizz-criado">
+    
+        </section>
         
         <div class="acessar-quizz">
-            <button>Acessar Quizz</button>
+            <button onclick="acessarQuizz()">Acessar Quizz</button>
         </div>
          <div class="voltar-home">
-            <button>Voltar pra home</button>
+            <button onclick="voltarHome()">Voltar pra home</button>
         </div>
     </div>
 
