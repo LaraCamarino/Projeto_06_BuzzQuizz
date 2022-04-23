@@ -8,10 +8,9 @@ const paginaHome = document.querySelector(".pagina1")
 let questions = [];
 let levels = [];
 let quizz = {};
-let quizzesDoUsuario = [];
+
 let primeiroQuizz = 0;
 
-const idQuizzesUsuario = [];
 
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
@@ -442,18 +441,20 @@ function salvarQuizz() {
 
 
 function armazenarQuizzUsuario(resposta) {
+    let idQuizzesUsuario = [];
+    let idsSerializados;
+
     if (primeiroQuizz === 0) {
-        quizzesDoUsuario.push(resposta.data);
         idQuizzesUsuario.push(resposta.data.id);
-        let quizzSerializado = JSON.stringify(resposta.data);
-        localStorage.setItem("quizzesDoUsuario", quizzSerializado);
+        idsSerializados = JSON.stringify(idQuizzesUsuario);
+        localStorage.setItem("ids", idsSerializados);
         primeiroQuizz++;
     } else {
-        quizzesDoUsuario = JSON.parse(localStorage.getItem("quizzesDoUsuario"));
-        quizzesDoUsuario.push(resposta.data);
+        idQuizzesUsuario = JSON.parse(localStorage.getItem("ids"));
         idQuizzesUsuario.push(resposta.data.id);
-        let quizzSerializado = JSON.stringify(resposta.data);
-        localStorage.setItem("quizzesDoUsuario", quizzSerializado);
+        console.log(idQuizzesUsuario);
+        idsSerializados = JSON.stringify(idQuizzesUsuario);
+        localStorage.setItem("ids", idsSerializados);
     }
 
     quizz = {};
@@ -495,5 +496,7 @@ function voltarHome() {
 }
 
 function limparQuizzesUsuario() {
-    localStorage.removeItem("quizzesDoUsuario");
+    localStorage.removeItem("ids");
 }
+
+//limparQuizzesUsuario();
