@@ -9,9 +9,6 @@ let questions = [];
 let levels = [];
 let quizz = {};
 
-let primeiroQuizz = 0;
-
-
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
     const pagina3Inputs = document.querySelector(".pagina3-inputs");
@@ -434,7 +431,7 @@ function verificaDescricaoNivel(descricaoNivel) {
 }
 
 function salvarQuizz() {
-    let promise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", quizz);
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", quizz);
     promise.then(armazenarQuizzUsuario);
 }
 
@@ -444,18 +441,17 @@ function armazenarQuizzUsuario(resposta) {
     let idQuizzesUsuario = [];
     let idsSerializados;
 
-    if (primeiroQuizz === 0) {
-        idQuizzesUsuario.push(resposta.data.id);
-        idsSerializados = JSON.stringify(idQuizzesUsuario);
-        localStorage.setItem("ids", idsSerializados);
-        primeiroQuizz++;
-    } else {
-        idQuizzesUsuario = JSON.parse(localStorage.getItem("ids"));
-        idQuizzesUsuario.push(resposta.data.id);
-        console.log(idQuizzesUsuario);
-        idsSerializados = JSON.stringify(idQuizzesUsuario);
-        localStorage.setItem("ids", idsSerializados);
+    idQuizzesUsuario = JSON.parse(localStorage.getItem("ids"));
+
+    if (idQuizzesUsuario === null) {
+        idQuizzesUsuario = [];
     }
+
+    idQuizzesUsuario.push(resposta.data.id);
+    console.log(idQuizzesUsuario);
+    idsSerializados = JSON.stringify(idQuizzesUsuario);
+    localStorage.setItem("ids", idsSerializados);
+    
 
     quizz = {};
     prepararSucesso();
@@ -489,14 +485,74 @@ function embaralharRespostas() {
 }
 
 function voltarHome() {
-    paginaHome.classList.remove("escondido");
-    document.querySelector(".pagina2").classList.add("escondido");
-    document.querySelector(".pagina3-sucesso").classList.add("escondido");
-    //Outra opção - document.location.reload(true);
+
+    document.location.reload(true);
 }
 
 function limparQuizzesUsuario() {
     localStorage.removeItem("ids");
 }
 
-//limparQuizzesUsuario();
+// limparQuizzesUsuario();
+
+function buscarQuizzes() {
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
+    promise.then(carregarQuizzes);
+}
+
+function carregarQuizzes(resposta) {
+    let quizzes = resposta.data;
+    let quizzesUsuario = document.querySelector(".meus-quizzes").querySelector(".quizzes");
+    let todosQuizzes = document.querySelector(".todos-quizzes").querySelector(".quizzes");
+    let idQuizzesUsuario = JSON.parse(localStorage.getItem("ids"));
+
+    if (idQuizzesUsuario === null) {
+        idQuizzesUsuario = [];
+    }
+
+    quizzesUsuario.innerHTML = "";
+    todosQuizzes.innerHTML = "";
+    for (let i = 0; i < quizzes.length; i++) {
+        if (verificaQuizzUsuario(quizzes[i].id, idQuizzesUsuario)) {
+            preparaQuizzesUsuario(quizzes[i], quizzesUsuario);
+        } else {
+            preparaTodosQuizzes(quizzes[i], todosQuizzes);
+        }
+    }
+
+    if (idQuizzesUsuario.length > 0) {
+        document.querySelector(".meus-quizzes-vazio").classList.add("escondido");
+        document.querySelector(".meus-quizzes").classList.remove("escondido");
+    }
+}
+
+function verificaQuizzUsuario(idQuizz, idQuizzesUsuario) {
+    for(let i = 0; i < idQuizzesUsuario.length; i++) {
+        if (Number(idQuizz) === idQuizzesUsuario[i]) {
+            return true;
+        } 
+    }
+    return false;
+}
+
+function preparaQuizzesUsuario(quizz, quizzesUsuario) {
+    quizzesUsuario.innerHTML += `
+        <div class="quizz">
+            <div class="degrade">
+                <img src="${quizz.image}" />
+            </div>
+            <h3>${quizz.title}</h3>
+        </div> `
+}
+
+function preparaTodosQuizzes(quizz, todosQuizzes) {
+    todosQuizzes.innerHTML +=  `
+        <div class="quizz">
+            <div class="degrade">
+                <img src="${quizz.image}" />
+            </div>
+            <h3>${quizz.title}</h3>
+        </div> `
+}
+
+buscarQuizzes();
