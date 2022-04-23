@@ -1,13 +1,17 @@
 let tituloQuizz;
 let urlImagem; //Imagem que ficará no título do quizz
 let numeroDePerguntas;
-let numeroDeNiveis;
+let numeroDeNiveis = 3;
 
 const paginaHome = document.querySelector(".pagina1")
 
 let questions = [];
 let levels = [];
 let quizz = {};
+let quizzesDoUsuario = [];
+let primeiroQuizz = 0;
+
+const idQuizzesUsuario = [];
 
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
@@ -28,7 +32,7 @@ function validacaoInformacoesBasicas() {
     if(verificaUrl(urlImagem) === false) {
         return false;
     }
-    if(numeroDePerguntas < 1) {
+    if(numeroDePerguntas < 3) {
         return false;
     }
     if(numeroDeNiveis < 2) {
@@ -167,7 +171,6 @@ function verificaPerguntas() {
             correctAnswer.image = urlDaCorreta;
             correctAnswer.isCorrectAnswer = true;
             answers.push(correctAnswer);
-            console.log("correct");
         }
 
        
@@ -186,7 +189,6 @@ function verificaPerguntas() {
             wrongAnswer1.image = urlDaPrimeiraIncorreta;
             wrongAnswer1.isCorrectAnswer = false;
             answers.push(wrongAnswer1);
-            console.log("incorrect1");
         }
 
         const segundaRespostaIncorreta = pergunta.querySelector(`.respostas-incorretas>div:nth-child(3)`);
@@ -205,7 +207,6 @@ function verificaPerguntas() {
                 wrongAnswer2.image = urlDaSegundaIncorreta;
                 wrongAnswer2.isCorrectAnswer = false;
                 answers.push(wrongAnswer2);
-                console.log("incorrect2");
             }
         } 
 
@@ -225,15 +226,14 @@ function verificaPerguntas() {
                 wrongAnswer3.image = urlDaTerceiraIncorreta;
                 wrongAnswer3.isCorrectAnswer = false;
                 answers.push(wrongAnswer3);
-                console.log("incorrect3");
             }
         } 
 
+        answers.sort(embaralharRespostas);
         question.answers = answers;
         questions.push(question);
     }
 
-    // embaralhar respostas antes
     quizz.questions = questions;
     return true;
     
@@ -347,7 +347,8 @@ function abrirConteudoNivel(icone) {
 }
 
 function validacaoNiveis() {
-    let level = {};
+    const auxLevels = [];
+    const porcentagemNiveis = [];
 
         // title: tituloNivel,
         // image: imagemNivel,
@@ -356,6 +357,7 @@ function validacaoNiveis() {
 
     for (let i = 1; i <= numeroDeNiveis; i++) {
         const nivel = document.querySelector(`.niveis>div:nth-child(${i})`);
+        let level = {};
   
         const tituloNivel = nivel.querySelector("#titulo-nivel").value;
         if (!verificaTituloNivel(tituloNivel)) {
@@ -364,15 +366,12 @@ function validacaoNiveis() {
             level.title = tituloNivel;
         }
 
-        const porcentagemNivel = nivel.querySelector("#porcentagem-nivel").value;
+        const porcentagemNivel = Number(nivel.querySelector("#porcentagem-nivel").value);
         if (!verificaPorcentagemNivel(porcentagemNivel)) {
             return false;
         } else {
             level.minValue = porcentagemNivel;
-        }
-
-        if(verificaNivelMinimo (porcentagemNivel)) {
-            return false;
+            porcentagemNiveis.push(porcentagemNivel);
         }
 
         const descricaoNivel = nivel.querySelector("#descrição-nivel").value;
@@ -383,12 +382,21 @@ function validacaoNiveis() {
         }
 
         const imagemNivel = nivel.querySelector("#imagem-nivel").value;
-        if (verificaUrl(imagemNivel) === false) {
+        if (!verificaUrl(imagemNivel)) {
             return false;
         } else {
             level.image = imagemNivel;
         }
+
+        auxLevels.push(level);
     }
+
+    if(!verificaNivelMinimo(porcentagemNiveis)) {
+        return false;
+    }
+     
+    levels = auxLevels;
+    quizz.levels = levels;
     return true;
 }
 
@@ -408,39 +416,64 @@ function verificaPorcentagemNivel(porcentagemNivel) {
     }
 }
 
-function verificaNivelMinimo (porcentagemNivel) {
-    let nivelMinimo = 0;
-    if(porcentagemNivel === 0) {
-        nivelMinimo++;
+function verificaNivelMinimo(porcentagemNiveis) {
+    for (let i = 0; i < porcentagemNiveis.length; i++) {
+        if (porcentagemNiveis[i] === 0){
+            return true;
+        }
     }
-    if(nivelMinimo === 0) {
-        return false
-    } 
-    return true;
+
+    return false;
 }
   
 function verificaDescricaoNivel(descricaoNivel) {
-    if (descricaoNivel < 30) {
+    if (descricaoNivel.length < 30) {
       return false;
     } else {
       return true;
     }
 }
 
+function salvarQuizz() {
+    let promise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", quizz);
+    promise.then(armazenarQuizzUsuario);
+}
+
+
+
+function armazenarQuizzUsuario(resposta) {
+    if (primeiroQuizz === 0) {
+        quizzesDoUsuario.push(resposta.data);
+        idQuizzesUsuario.push(resposta.data.id);
+        let quizzSerializado = JSON.stringify(resposta.data);
+        localStorage.setItem("quizzesDoUsuario", quizzSerializado);
+        primeiroQuizz++;
+    } else {
+        quizzesDoUsuario = JSON.parse(localStorage.getItem("quizzesDoUsuario"));
+        quizzesDoUsuario.push(resposta.data);
+        idQuizzesUsuario.push(resposta.data.id);
+        let quizzSerializado = JSON.stringify(resposta.data);
+        localStorage.setItem("quizzesDoUsuario", quizzSerializado);
+    }
+
+    quizz = {};
+    prepararSucesso();
+}
+
 function irSucesso() {
   if (validacaoNiveis()) {
-    const pagina3Niveis = document.querySelector(".pagina3-niveis");
-    const pagina3Sucesso = document.querySelector(".pagina3-sucesso");
-    pagina3Sucesso.classList.remove("escondido");
-    pagina3Niveis.classList.add("escondido");
-
-    prepararSucesso();
+    salvarQuizz();
   } else {
     alert("Por favor, preencha os dados corretamente!");
   }
 }
 
 function prepararSucesso() {
+    const pagina3Niveis = document.querySelector(".pagina3-niveis");
+    const pagina3Sucesso = document.querySelector(".pagina3-sucesso");
+    pagina3Sucesso.classList.remove("escondido");
+    pagina3Niveis.classList.add("escondido");
+
     const quizzCriado = document.querySelector(".quizz-criado");
     quizzCriado.innerHTML = `
         <div class="degrade">
@@ -452,7 +485,6 @@ function prepararSucesso() {
 
 function embaralharRespostas() {
     return Math.random() - 0.5;
-    //questions.answers.sort(embaralharRespostas)
 }
 
 function voltarHome() {
@@ -462,3 +494,6 @@ function voltarHome() {
     //Outra opção - document.location.reload(true);
 }
 
+function limparQuizzesUsuario() {
+    localStorage.removeItem("quizzesDoUsuario");
+}
