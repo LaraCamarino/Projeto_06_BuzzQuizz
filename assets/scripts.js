@@ -556,7 +556,7 @@ buscarQuizzes();
 
 function abrirQuizzSelecionado(quizz) {
     let idQuizzSelecionado = `${quizz.id}`;
-    //console.log(idQuizzSelecionado);
+    console.log(idQuizzSelecionado);
 
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idQuizzSelecionado}`);
     promise.then(preparaQuizzSelecionado);
@@ -590,11 +590,10 @@ function preparaQuizzSelecionado(resposta) {
                     <div class="caixa-opcoes"></div>
             </div>`
         
-        let answers = questions[i].answers;
-        const conteinerOpcoes = document.querySelector(".i"+ i +"> .caixa-opcoes");
-        conteinerOpcoes.innerHTML = "";
-        questions[i].answers.sort(embaralharRespostas);
-
+    let answers = questions[i].answers;
+    const conteinerOpcoes = document.querySelector(".i"+ i +"> .caixa-opcoes");
+    conteinerOpcoes.innerHTML = "";
+    questions[i].answers.sort(embaralharRespostas);
 
         for(let j = 0; j < answers.length; j++) {
             conteinerOpcoes.innerHTML += `
@@ -624,8 +623,9 @@ function opcaoEscolhida(opcaoEscolhida) {
         if(opcoes[i].classList.contains("false")) {
             opcoes[i].classList.add("errada");
         }
-        caixaPerguntas.classList.add("respondida");
+        
     }
+    caixaPerguntas.classList.add("respondida");
    
     setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
 }
@@ -638,4 +638,6 @@ function scrollParaProxima(pergunta) {
 
 function reininciarQuizz() {
     
+    
+    document.documentElement.scrollTo({top: 0, behavior: "smooth"});
 }
