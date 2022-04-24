@@ -3,11 +3,11 @@ let urlImagem; //Imagem que ficará no título do quizz
 let numeroDePerguntas;
 let numeroDeNiveis;
 
-const paginaHome = document.querySelector(".pagina1")
-
 let questions = [];
 let levels = [];
 let quizz = {};
+
+let numeroDeAcertos = 0;
 
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
@@ -553,6 +553,9 @@ function preparaTodosQuizzes(quizz, todosQuizzes) {
 
 buscarQuizzes();
 
+let quizzEscolhido;
+let NumeroDePerguntasDoSelecionado;
+
 function abrirQuizzSelecionado(quizz) {
     let idQuizzSelecionado = `${quizz.id}`;
     //console.log(idQuizzSelecionado);
@@ -567,17 +570,18 @@ function preparaQuizzSelecionado(resposta) {
     pagina1.classList.add("escondido");
     pagina2.classList.remove("escondido");
 
-    let quizz = resposta.data;
-    let questions = quizz.questions;
+    quizzEscolhido = resposta.data;
+    let questions = quizzEscolhido.questions;
+    NumeroDePerguntasDoSelecionado = questions.length;
 
     const quizzSelecionado = document.querySelector(".quizz-selecionado");
     quizzSelecionado.innerHTML = "";
     quizzSelecionado.innerHTML +=  `
         <header class="titulo-quiz">
             <div class="overlay-preto">
-                <img src="${quizz.image}" />
+                <img src="${quizzEscolhido.image}" />
             </div>
-            <h1>${quizz.title}</h1>
+            <h1>${quizzEscolhido.title}</h1>
         </header>
         <div class="conteiner-quiz"></div>`
 
@@ -585,8 +589,8 @@ function preparaQuizzSelecionado(resposta) {
     for(let i = 0; i < questions.length; i++) {
         containerQuizz.innerHTML +=  `
             <div class="caixa-pergunta i${i}">
-                    <div id="pergunta${i}" style="background-color:${questions[i].color}" class="titulo-pergunta">${questions[i].title}</div>
-                    <div class="caixa-opcoes"></div>
+                <div id="pergunta${i}" style="background-color:${questions[i].color}" class="titulo-pergunta">${questions[i].title}</div>
+                <div class="caixa-opcoes"></div>
             </div>`
         
         let answers = questions[i].answers;
@@ -597,42 +601,94 @@ function preparaQuizzSelecionado(resposta) {
 
         for(let j = 0; j < answers.length; j++) {
             conteinerOpcoes.innerHTML += `
-            <div id="${answers[j].isCorrectAnswer}" class="opcao" onclick="opcaoEscolhida(this)">
+            <div class="opcao ${answers[j].isCorrectAnswer}" onclick="opcaoEscolhida(this)">
                 <img src="${answers[j].image}" alt="">
-                <p>${answers[j].title}</p>
+                <p>${answers[j].text}</p>
             </div>`;
         }   
     }   
 }
 
 function opcaoEscolhida(opcaoEscolhida) {
-    let caixaPerguntas = opcaoEscolhida.parentNode;
-    let opcoes = caixaPerguntas.querySelectorAll(".opcao");
+    let caixaOpcoes = opcaoEscolhida.parentNode;
+    console.log(caixaOpcoes.parentNode)
+    let opcoes = caixaOpcoes.querySelectorAll(".opcao");
+
+    if(caixaOpcoes.classList.contains("respondida")) {
+        return;
+    }
 
     for(let i = 0; i < opcoes.length; i++) {
         if(opcaoEscolhida !== opcoes[i]) {
             opcoes[i].classList.add("nao-selecionada");
         }
+        if(opcoes[i].classList.contains("true")) {
+            opcoes[i].classList.add("certa");
+        }
+        if(opcoes[i].classList.contains("false")) {
+            opcoes[i].classList.add("errada");
+        }
+        caixaOpcoes.classList.add("respondida");
     }
-    revelarRespostaCorreta(opcoes);   
-    setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
+
+    if (opcaoEscolhida.classList.contains("certa")) {
+        numeroDeAcertos++;
+    }
+
+    if (caixaOpcoes.parentNode.classList.contains(`i${NumeroDePerguntasDoSelecionado-1}`)) {
+        console.log("entrou");
+        mostrarResultado();
+        setTimeout(scrollParaFim, 2000);
+    } else {
+        console.log("ola");
+        setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
+    }
+   
 }
 
-function revelarRespostaCorreta(opcoes) {
-    
+function mostrarResultado() {
+    const quizzSelecionado = document.querySelector(".quizz-selecionado");
+    const porcentagemAcerto = Math.round((numeroDeAcertos/NumeroDePerguntasDoSelecionado)*100);
+    const levels = quizzEscolhido.levels;
+    let minValueAnterior = 0;
+    let indiceAtingido = 0;
+    for (let i = 0; i < levels.length; i++) {
+        if (porcentagemAcerto >= levels[i].minValue && minValueAnterior <= levels[i].minValue) {
+            minValueAnterior = levels[i].minValue;
+            indiceAtingido = i;
+        }
+    }
 
-      
-}
+    const levelAtingido = quizzEscolhido.levels[indiceAtingido];
 
-function permitirSoUmaTentativa() {
-
+    quizzSelecionado.innerHTML += `
+        <div class="caixa-resultado">
+                <div class="titulo-resultado">${porcentagemAcerto}% de acerto: ${levelAtingido.title}</div>
+                <div class="conteudo-resultado">
+                    <img src=${levelAtingido.image} alt="">
+                    <p>${levelAtingido.text}</p>
+                </div>
+            </div>
+            <div class="reininciar">
+                    <button onclick="reininciarQuizz()">Reiniciar Quizz</button>
+            </div>
+            <div class="voltar-home">
+                    <button onclick="voltarHome()">Voltar pra home</button>
+        </div>
+        `
 }
 
 function scrollParaProxima(pergunta) {
     const elemento = pergunta.parentNode.parentNode;
     const proximaPergunta = elemento.nextElementSibling;
-    proximaPergunta.scrollIntoView({ behavior: "smooth" })
+    proximaPergunta.scrollIntoView({ behavior: "smooth" });
 }
+
+function scrollParaFim() {
+    const resultado = document.querySelector(".caixa-resultado");
+    resultado.scrollIntoView({ behavior: "smooth" });
+}
+
 
 function reininciarQuizz() {
     
