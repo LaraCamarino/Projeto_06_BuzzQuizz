@@ -446,7 +446,6 @@ function armazenarQuizzUsuario(resposta) {
     }
 
     idQuizzesUsuario.push(resposta.data.id);
-    console.log(idQuizzesUsuario);
     idsSerializados = JSON.stringify(idQuizzesUsuario);
     localStorage.setItem("ids", idsSerializados);
     
@@ -490,7 +489,7 @@ function limparQuizzesUsuario() {
     localStorage.removeItem("ids");
 }
 
-// limparQuizzesUsuario();
+//limparQuizzesUsuario();
 
 function buscarQuizzes() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");

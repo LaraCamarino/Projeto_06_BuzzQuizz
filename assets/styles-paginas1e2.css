@@ -28,7 +28,7 @@ body {
 .meus-quizzes-vazio {
     margin: 146px auto 0 auto;
     height: 181px;
-    width: 1050px;
+    width: 1070px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,7 +62,7 @@ body {
 .meus-quizzes {
     margin: 140px auto 0 auto;
     height: 217px;
-    width: 1050px;
+    width: 1070px;
 }
 
 .sub-titulo {
@@ -86,13 +86,14 @@ body {
 .quizzes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .quizz {
     width: 340px;
     height: 181px;
     margin-top: 15px;
+    margin-right: 15px;
     position: relative;
     word-break: break-word;
 }
@@ -116,7 +117,7 @@ body {
 
 .todos-quizzes {
     margin: 60px auto 200px auto;
-    width: 1050px;
+    width: 1070px;
 }
 
 .conteiner-quiz {
