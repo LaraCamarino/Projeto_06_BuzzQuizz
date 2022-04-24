@@ -150,7 +150,7 @@ body {
 .overlay-preto::after {
     content: '';
     width: 100%;
-    height: 99%;
+    height: 100%;
     background: black;
     opacity: 0.6;
     position: absolute;
@@ -183,7 +183,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #434CA0;
     color: #FFFFFF;
     font-size: 23px;
     font-weight: 700;
@@ -202,13 +201,16 @@ body {
     
 }
 
-.selecionada {
+.nao-selecionada {
+    opacity: 30%; 
+}
+
+.certa {
     color: #009C22;
 }
 
-.nao-selecionada {
+.errada {
     color: #FF4B4B;
-    opacity: 30%;
 }
 
 .opcao img {

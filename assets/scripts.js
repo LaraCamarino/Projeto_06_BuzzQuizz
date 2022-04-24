@@ -1,7 +1,7 @@
 let tituloQuizz;
 let urlImagem; //Imagem que ficará no título do quizz
 let numeroDePerguntas;
-let numeroDeNiveis = 3;
+let numeroDeNiveis;
 
 const paginaHome = document.querySelector(".pagina1")
 
@@ -435,8 +435,6 @@ function salvarQuizz() {
     promise.then(armazenarQuizzUsuario);
 }
 
-
-
 function armazenarQuizzUsuario(resposta) {
     let idQuizzesUsuario = [];
     let idsSerializados;
@@ -485,7 +483,6 @@ function embaralharRespostas() {
 }
 
 function voltarHome() {
-
     document.location.reload(true);
 }
 
@@ -537,7 +534,7 @@ function verificaQuizzUsuario(idQuizz, idQuizzesUsuario) {
 
 function preparaQuizzesUsuario(quizz, quizzesUsuario) {
     quizzesUsuario.innerHTML += `
-        <div class="quizz">
+        <div id="${quizz.id}" class="quizz" onclick="abrirQuizzSelecionado(this)">
             <div class="degrade">
                 <img src="${quizz.image}" />
             </div>
@@ -547,7 +544,7 @@ function preparaQuizzesUsuario(quizz, quizzesUsuario) {
 
 function preparaTodosQuizzes(quizz, todosQuizzes) {
     todosQuizzes.innerHTML +=  `
-        <div class="quizz">
+        <div id="${quizz.id}" class="quizz" onclick="abrirQuizzSelecionado(this)">
             <div class="degrade">
                 <img src="${quizz.image}" />
             </div>
@@ -556,3 +553,88 @@ function preparaTodosQuizzes(quizz, todosQuizzes) {
 }
 
 buscarQuizzes();
+
+function abrirQuizzSelecionado(quizz) {
+    let idQuizzSelecionado = `${quizz.id}`;
+    //console.log(idQuizzSelecionado);
+
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idQuizzSelecionado}`);
+    promise.then(preparaQuizzSelecionado);
+}
+
+function preparaQuizzSelecionado(resposta) {
+    const pagina1 = document.querySelector(".pagina1");
+    const pagina2 = document.querySelector(".pagina2");
+    pagina1.classList.add("escondido");
+    pagina2.classList.remove("escondido");
+
+    let quizz = resposta.data;
+    let questions = quizz.questions;
+
+    const quizzSelecionado = document.querySelector(".quizz-selecionado");
+    quizzSelecionado.innerHTML = "";
+    quizzSelecionado.innerHTML +=  `
+        <header class="titulo-quiz">
+            <div class="overlay-preto">
+                <img src="${quizz.image}" />
+            </div>
+            <h1>${quizz.title}</h1>
+        </header>
+        <div class="conteiner-quiz"></div>`
+
+    const containerQuizz = document.querySelector(".conteiner-quiz")
+    for(let i = 0; i < questions.length; i++) {
+        containerQuizz.innerHTML +=  `
+            <div class="caixa-pergunta i${i}">
+                    <div id="pergunta${i}" style="background-color:${questions[i].color}" class="titulo-pergunta">${questions[i].title}</div>
+                    <div class="caixa-opcoes"></div>
+            </div>`
+        
+        let answers = questions[i].answers;
+        const conteinerOpcoes = document.querySelector(".i"+ i +"> .caixa-opcoes");
+        conteinerOpcoes.innerHTML = "";
+        questions[i].answers.sort(embaralharRespostas);
+
+
+        for(let j = 0; j < answers.length; j++) {
+            conteinerOpcoes.innerHTML += `
+            <div id="${answers[j].isCorrectAnswer}" class="opcao" onclick="opcaoEscolhida(this)">
+                <img src="${answers[j].image}" alt="">
+                <p>${answers[j].title}</p>
+            </div>`;
+        }   
+    }   
+}
+
+function opcaoEscolhida(opcaoEscolhida) {
+    let caixaPerguntas = opcaoEscolhida.parentNode;
+    let opcoes = caixaPerguntas.querySelectorAll(".opcao");
+
+    for(let i = 0; i < opcoes.length; i++) {
+        if(opcaoEscolhida !== opcoes[i]) {
+            opcoes[i].classList.add("nao-selecionada");
+        }
+    }
+    revelarRespostaCorreta(opcoes);   
+    setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
+}
+
+function revelarRespostaCorreta(opcoes) {
+    
+
+      
+}
+
+function permitirSoUmaTentativa() {
+
+}
+
+function scrollParaProxima(pergunta) {
+    const elemento = pergunta.parentNode.parentNode;
+    const proximaPergunta = elemento.nextElementSibling;
+    proximaPergunta.scrollIntoView({ behavior: "smooth" })
+}
+
+function reininciarQuizz() {
+    
+}

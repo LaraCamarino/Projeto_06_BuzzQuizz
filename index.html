@@ -21,6 +21,8 @@
     
     <header class="titulo">BuzzQuizz</header> 
 
+        
+
     <div class="pagina1">
         <section class="meus-quizzes-vazio">
             <div>
@@ -53,56 +55,13 @@
     </div>
 
     <div class="pagina2 escondido">
-        <header class="titulo-quiz">
-            <div class="overlay-preto">
-                <img src="images/Rectangle 36.png" />
-            </div>
-            <h1>O quão Potterhead é você?</h1>
-        </header>
-        <div class="conteiner-quiz">
-            <div class="caixa-pergunta">
-                    <div class="titulo-pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
-                    <div class="caixa-opcoes">
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 1</p>
-                        </div>
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 2</p>
-                        </div>
-                        <div class="opcao ">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 3</p>
-                        </div>
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 4</p>
-                        </div>
-                    </div>
-            </div>
-            <div class="caixa-pergunta">
-                    <div class="titulo-pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
-                    <div class="caixa-opcoes">
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 1</p>
-                        </div>
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 2</p>
-                        </div>
-                        <div class="opcao ">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 3</p>
-                        </div>
-                        <div class="opcao">
-                            <img src="/images/img_teste.jpg" alt="">
-                            <p>Opção 4</p>
-                        </div>
-                    </div>
-            </div>
-            <div class="caixa-resultado">
+        <section class="quizz-selecionado">
+
+        </section>
+        
+        
+                        
+            <div class="caixa-resultado escondido">
                 <div class="titulo-resultado">88% de acerto: Você é praticamente um aluno de Hogwarts!</div>
                 <div class="conteudo-resultado">
                     <img src="/images/img_teste.jpg" alt="">
@@ -110,7 +69,7 @@
                 </div>
             </div>
             <div class="reininciar">
-                    <button>Reiniciar Quizz</button>
+                    <button onclick="reininciarQuizz()">Reiniciar Quizz</button>
             </div>
             <div class="voltar-home">
                     <button onclick="voltarHome()">Voltar pra home</button>
@@ -166,6 +125,8 @@
             <button onclick="voltarHome()">Voltar pra home</button>
         </div>
     </div>
+    
+    
 
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
