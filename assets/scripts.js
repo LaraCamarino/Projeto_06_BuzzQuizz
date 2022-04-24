@@ -490,7 +490,7 @@ function limparQuizzesUsuario() {
     localStorage.removeItem("ids");
 }
 
-// limparQuizzesUsuario();
+//limparQuizzesUsuario();
 
 function buscarQuizzes() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -598,9 +598,9 @@ function preparaQuizzSelecionado(resposta) {
 
         for(let j = 0; j < answers.length; j++) {
             conteinerOpcoes.innerHTML += `
-            <div id="${answers[j].isCorrectAnswer}" class="opcao" onclick="opcaoEscolhida(this)">
+            <div class="opcao ${answers[j].isCorrectAnswer}" onclick="opcaoEscolhida(this)">
                 <img src="${answers[j].image}" alt="">
-                <p>${answers[j].title}</p>
+                <p>${answers[j].text}</p>
             </div>`;
         }   
     }   
@@ -610,23 +610,24 @@ function opcaoEscolhida(opcaoEscolhida) {
     let caixaPerguntas = opcaoEscolhida.parentNode;
     let opcoes = caixaPerguntas.querySelectorAll(".opcao");
 
+    if(caixaPerguntas.classList.contains("respondida")) {
+        return;
+    }
+
     for(let i = 0; i < opcoes.length; i++) {
         if(opcaoEscolhida !== opcoes[i]) {
             opcoes[i].classList.add("nao-selecionada");
         }
+        if(opcoes[i].classList.contains("true")) {
+            opcoes[i].classList.add("certa");
+        }
+        if(opcoes[i].classList.contains("false")) {
+            opcoes[i].classList.add("errada");
+        }
+        caixaPerguntas.classList.add("respondida");
     }
-    revelarRespostaCorreta(opcoes);   
+   
     setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
-}
-
-function revelarRespostaCorreta(opcoes) {
-    
-
-      
-}
-
-function permitirSoUmaTentativa() {
-
 }
 
 function scrollParaProxima(pergunta) {
