@@ -9,6 +9,11 @@ let quizz = {};
 
 let numeroDeAcertos = 0;
 
+let idQuizzCriado;
+
+let quizzEscolhido;
+let NumeroDePerguntasDoSelecionado;
+
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
     const pagina3Inputs = document.querySelector(".pagina3-inputs");
@@ -296,6 +301,8 @@ function irCriarNiveis() {
         pagina3Perguntas.classList.add("escondido");
         pagina3Niveis.classList.remove("escondido");
 
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
         prepararNiveis();
     } else {
         alert("Por favor, preencha os dados corretamente!");
@@ -445,7 +452,8 @@ function armazenarQuizzUsuario(resposta) {
         idQuizzesUsuario = [];
     }
 
-    idQuizzesUsuario.push(resposta.data.id);
+    idQuizzCriado = resposta.data.id;
+    idQuizzesUsuario.push(idQuizzCriado);
     idsSerializados = JSON.stringify(idQuizzesUsuario);
     localStorage.setItem("ids", idsSerializados);
     
@@ -467,6 +475,8 @@ function prepararSucesso() {
     const pagina3Sucesso = document.querySelector(".pagina3-sucesso");
     pagina3Sucesso.classList.remove("escondido");
     pagina3Niveis.classList.add("escondido");
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 
     const quizzCriado = document.querySelector(".quizz-criado");
     quizzCriado.innerHTML = `
@@ -553,22 +563,32 @@ function preparaTodosQuizzes(quizz, todosQuizzes) {
 
 buscarQuizzes();
 
-let quizzEscolhido;
-let NumeroDePerguntasDoSelecionado;
-
 function abrirQuizzSelecionado(quizz) {
     let idQuizzSelecionado = `${quizz.id}`;
-    console.log(idQuizzSelecionado);
 
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idQuizzSelecionado}`);
     promise.then(preparaQuizzSelecionado);
 }
 
+function abrirQuizzCriado(idQuizzCriado) {
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idQuizzCriado}`);
+    promise.then(preparaQuizzSelecionado);
+}
+
 function preparaQuizzSelecionado(resposta) {
-    const pagina1 = document.querySelector(".pagina1");
-    const pagina2 = document.querySelector(".pagina2");
-    pagina1.classList.add("escondido");
-    pagina2.classList.remove("escondido");
+    if (document.querySelector(".pagina1").classList.contains("escondido")) {
+        const pagina3Sucesso = document.querySelector(".pagina3-sucesso");
+        const pagina2 = document.querySelector(".pagina2");
+        pagina3Sucesso.classList.add("escondido");
+        pagina2.classList.remove("escondido");
+    } else {
+        const pagina1 = document.querySelector(".pagina1");
+        const pagina2 = document.querySelector(".pagina2");
+        pagina1.classList.add("escondido");
+        pagina2.classList.remove("escondido");
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 
     quizzEscolhido = resposta.data;
     let questions = quizzEscolhido.questions;
