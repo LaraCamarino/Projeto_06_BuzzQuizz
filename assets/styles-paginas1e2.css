@@ -28,7 +28,7 @@ body {
 .meus-quizzes-vazio {
     margin: 146px auto 0 auto;
     height: 181px;
-    width: 1050px;
+    width: 1070px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,7 +62,7 @@ body {
 .meus-quizzes {
     margin: 140px auto 0 auto;
     height: 217px;
-    width: 1050px;
+    width: 1070px;
 }
 
 .sub-titulo {
@@ -86,13 +86,14 @@ body {
 .quizzes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .quizz {
     width: 340px;
     height: 181px;
     margin-top: 15px;
+    margin-right: 15px;
     position: relative;
     word-break: break-word;
 }
@@ -116,7 +117,7 @@ body {
 
 .todos-quizzes {
     margin: 60px auto 200px auto;
-    width: 1050px;
+    width: 1070px;
 }
 
 .pagina2, .quizz-selecionado {
@@ -130,6 +131,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 57px;
 }
 
 .titulo-quiz {
@@ -192,6 +194,8 @@ body {
     color: #FFFFFF;
     font-size: 23px;
     font-weight: 700;
+    padding-right: 15px;
+    padding-left: 25px;
     margin-bottom: 20px;
 }
 
@@ -203,7 +207,8 @@ body {
 }
 
 .opcao {
-    margin-bottom: 20px;
+    width: 329.91px;
+    margin-bottom: 20px;        
 }
 
 .nao-selecionada {
@@ -236,7 +241,6 @@ body {
     padding: 18px;
     background-color: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    margin-top: 44px;
     margin-bottom: 57px;
 }
 

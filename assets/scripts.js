@@ -3,11 +3,11 @@ let urlImagem; //Imagem que ficará no título do quizz
 let numeroDePerguntas;
 let numeroDeNiveis;
 
-const paginaHome = document.querySelector(".pagina1")
-
 let questions = [];
 let levels = [];
 let quizz = {};
+
+let numeroDeAcertos = 0;
 
 function irCriarQuizz() {
     const pagina1 = document.querySelector(".pagina1");
@@ -446,7 +446,6 @@ function armazenarQuizzUsuario(resposta) {
     }
 
     idQuizzesUsuario.push(resposta.data.id);
-    console.log(idQuizzesUsuario);
     idsSerializados = JSON.stringify(idQuizzesUsuario);
     localStorage.setItem("ids", idsSerializados);
     
@@ -471,7 +470,7 @@ function prepararSucesso() {
 
     const quizzCriado = document.querySelector(".quizz-criado");
     quizzCriado.innerHTML = `
-        <div class="degrade">
+        <div id="" class="degrade" onclick="abrirQuizzSelecionado(this)">
             <img src=${urlImagem} />
         </div>
         <h3>${tituloQuizz}</h3>
@@ -554,6 +553,9 @@ function preparaTodosQuizzes(quizz, todosQuizzes) {
 
 buscarQuizzes();
 
+let quizzEscolhido;
+let NumeroDePerguntasDoSelecionado;
+
 function abrirQuizzSelecionado(quizz) {
     let idQuizzSelecionado = `${quizz.id}`;
     console.log(idQuizzSelecionado);
@@ -568,17 +570,18 @@ function preparaQuizzSelecionado(resposta) {
     pagina1.classList.add("escondido");
     pagina2.classList.remove("escondido");
 
-    let quizz = resposta.data;
-    let questions = quizz.questions;
+    quizzEscolhido = resposta.data;
+    let questions = quizzEscolhido.questions;
+    NumeroDePerguntasDoSelecionado = questions.length;
 
     const quizzSelecionado = document.querySelector(".quizz-selecionado");
     quizzSelecionado.innerHTML = "";
     quizzSelecionado.innerHTML +=  `
         <header class="titulo-quiz">
             <div class="overlay-preto">
-                <img src="${quizz.image}" />
+                <img src="${quizzEscolhido.image}" />
             </div>
-            <h1>${quizz.title}</h1>
+            <h1>${quizzEscolhido.title}</h1>
         </header>
         <div class="conteiner-quiz"></div>`
 
@@ -586,8 +589,8 @@ function preparaQuizzSelecionado(resposta) {
     for(let i = 0; i < questions.length; i++) {
         containerQuizz.innerHTML +=  `
             <div class="caixa-pergunta i${i}">
-                    <div id="pergunta${i}" style="background-color:${questions[i].color}" class="titulo-pergunta">${questions[i].title}</div>
-                    <div class="caixa-opcoes"></div>
+                <div id="pergunta${i}" style="background-color:${questions[i].color}" class="titulo-pergunta">${questions[i].title}</div>
+                <div class="caixa-opcoes"></div>
             </div>`
         
     let answers = questions[i].answers;
@@ -602,14 +605,15 @@ function preparaQuizzSelecionado(resposta) {
                 <p>${answers[j].text}</p>
             </div>`;
         }   
-    }   
+    }       
 }
 
 function opcaoEscolhida(opcaoEscolhida) {
-    let caixaPerguntas = opcaoEscolhida.parentNode;
-    let opcoes = caixaPerguntas.querySelectorAll(".opcao");
+    let caixaOpcoes = opcaoEscolhida.parentNode;
+    console.log(caixaOpcoes.parentNode)
+    let opcoes = caixaOpcoes.querySelectorAll(".opcao");
 
-    if(caixaPerguntas.classList.contains("respondida")) {
+    if(caixaOpcoes.classList.contains("respondida")) {
         return;
     }
 
@@ -623,21 +627,72 @@ function opcaoEscolhida(opcaoEscolhida) {
         if(opcoes[i].classList.contains("false")) {
             opcoes[i].classList.add("errada");
         }
-        
+        caixaOpcoes.classList.add("respondida");
     }
-    caixaPerguntas.classList.add("respondida");
+
+    if (opcaoEscolhida.classList.contains("certa")) {
+        numeroDeAcertos++;
+    }
+
+    if (caixaOpcoes.parentNode.classList.contains(`i${NumeroDePerguntasDoSelecionado-1}`)) {
+        console.log("entrou");
+        mostrarResultado();
+        setTimeout(scrollParaFim, 2000);
+    } else {
+        console.log("ola");
+        setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
+    }
+    caixaOpcoes.classList.add("respondida");
    
-    setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
+}
+
+function mostrarResultado() {
+    const quizzSelecionado = document.querySelector(".quizz-selecionado");
+    const porcentagemAcerto = Math.round((numeroDeAcertos/NumeroDePerguntasDoSelecionado)*100);
+    const levels = quizzEscolhido.levels;
+    let minValueAnterior = 0;
+    let indiceAtingido = 0;
+    for (let i = 0; i < levels.length; i++) {
+        if (porcentagemAcerto >= levels[i].minValue && minValueAnterior <= levels[i].minValue) {
+            minValueAnterior = levels[i].minValue;
+            indiceAtingido = i;
+        }
+    }
+
+    const levelAtingido = quizzEscolhido.levels[indiceAtingido];
+
+    quizzSelecionado.innerHTML += `
+        <div class="caixa-resultado">
+                <div class="titulo-resultado">${porcentagemAcerto}% de acerto: ${levelAtingido.title}</div>
+                <div class="conteudo-resultado">
+                    <img src=${levelAtingido.image} alt="">
+                    <p>${levelAtingido.text}</p>
+                </div>
+            </div>
+            <div class="reininciar">
+                    <button onclick="reininciarQuizz()">Reiniciar Quizz</button>
+            </div>
+            <div class="voltar-home">
+                    <button onclick="voltarHome()">Voltar pra home</button>
+        </div>
+        `
 }
 
 function scrollParaProxima(pergunta) {
     const elemento = pergunta.parentNode.parentNode;
     const proximaPergunta = elemento.nextElementSibling;
-    proximaPergunta.scrollIntoView({ behavior: "smooth" })
+    proximaPergunta.scrollIntoView({ behavior: "smooth" });
+}
+
+function scrollParaFim() {
+    const resultado = document.querySelector(".caixa-resultado");
+    resultado.scrollIntoView({ behavior: "smooth" });
 }
 
 function reininciarQuizz() {
-    
-    
+    NumeroDePerguntasDoSelecionado = 0;
+    numeroDeAcertos = 0;
+    abrirQuizzSelecionado(quizzEscolhido);
     document.documentElement.scrollTo({top: 0, behavior: "smooth"});
 }
+
