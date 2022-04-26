@@ -480,7 +480,7 @@ function prepararSucesso() {
 
     const quizzCriado = document.querySelector(".quizz-criado");
     quizzCriado.innerHTML = `
-        <div id="" class="degrade" onclick="abrirQuizzSelecionado(this)">
+        <div id="" class="degrade" onclick="abrirQuizzCriado(idQuizzCriado)">
             <img src=${urlImagem} />
         </div>
         <h3>${tituloQuizz}</h3>
