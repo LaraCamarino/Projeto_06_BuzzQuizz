@@ -630,7 +630,6 @@ function preparaQuizzSelecionado(resposta) {
 
 function opcaoEscolhida(opcaoEscolhida) {
     let caixaOpcoes = opcaoEscolhida.parentNode;
-    console.log(caixaOpcoes.parentNode)
     let opcoes = caixaOpcoes.querySelectorAll(".opcao");
 
     if(caixaOpcoes.classList.contains("respondida")) {

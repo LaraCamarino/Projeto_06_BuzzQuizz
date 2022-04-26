@@ -223,10 +223,6 @@ body {
     margin-bottom: 20px;        
 }
 
-.opcao p {
-    word-break: break-word;
-}
-
 .nao-selecionada {
     opacity: 30%; 
 }
