@@ -499,8 +499,6 @@ function limparQuizzesUsuario() {
     localStorage.removeItem("ids");
 }
 
-//limparQuizzesUsuario();
-
 function buscarQuizzes() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
     promise.then(carregarQuizzes);
@@ -654,11 +652,9 @@ function opcaoEscolhida(opcaoEscolhida) {
     }
 
     if (caixaOpcoes.parentNode.classList.contains(`i${NumeroDePerguntasDoSelecionado-1}`)) {
-        console.log("entrou");
         mostrarResultado();
         setTimeout(scrollParaFim, 2000);
     } else {
-        console.log("ola");
         setTimeout(scrollParaProxima, 2000, opcaoEscolhida);
     }
     caixaOpcoes.classList.add("respondida");
@@ -715,3 +711,4 @@ function reininciarQuizz() {
     document.documentElement.scrollTo({top: 0, behavior: "smooth"});
 }
 
+//limparQuizzesUsuario();

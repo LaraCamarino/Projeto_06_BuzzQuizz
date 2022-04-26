@@ -61,7 +61,6 @@ body {
 
 .meus-quizzes {
     margin: 140px auto 0 auto;
-    height: 217px;
     width: 1070px;
 }
 
@@ -86,13 +85,6 @@ body {
 .quizzes {
     display: flex;
     justify-content: start;
-}
-
-.meus-quizzes .quizzes {
-    overflow-x: scroll;
-}
-
-.todos-quizzes .quizzes {
     flex-wrap: wrap;
 }
 
@@ -330,5 +322,53 @@ body {
 
 .escondido {
     display: none;
+}
+
+@media(max-width: 1100px) {
+    .pagina1 {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    .meus-quizzes-vazio {
+        margin-top: 100px;
+        width: 100%;
+    }
+
+    .meus-quizzes {
+        width: 100%;
+        margin-top: 100px;
+    }
+
+    .todos-quizzes {
+        width: 100%;
+        margin-top: 35px;
+    }
+
+    .quizzes {
+        display: flex;
+        justify-content: center;
+    }
+
+    .quizz {
+        margin-right: 0;
+    }
+
+    .meus-quizzes .sub-titulo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .sub-titulo ion-icon {
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 400px) {
+    .quizz img {
+        width: 100%;
+    }
 }
 
