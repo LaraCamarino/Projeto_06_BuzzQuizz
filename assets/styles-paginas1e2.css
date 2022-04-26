@@ -357,6 +357,8 @@ body {
     .quizzes {
         display: flex;
         justify-content: center;
+        margin-right: -15px;
+
     }
 
     .quizz {
