@@ -338,7 +338,7 @@ function prepararNiveis() {
                         <input type="text" id="titulo-nivel" placeholder="Título do nível">
                         <input type="text" id="porcentagem-nivel" placeholder="% de acerto mínima">
                         <input type="text" id="imagem-nivel" placeholder="URL da imagem do nível">
-                        <input type="text" id="descrição-nivel" placeholder="Descrição do nível">
+                        <input type="text" id="descrição-nivel" class="input-descricao" placeholder="Descrição do nível">
                     </div>
                 </div>
             </div>`

@@ -371,38 +371,7 @@ body {
     .sub-titulo ion-icon {
         margin-left: 0;
     }
-}
 
-@media(max-width: 780px) {
-    .caixa-pergunta, .caixa-resultado {
-        width: 620px;
-    }
-
-    .titulo-pergunta, .titulo-resultado {
-        width: 580px;
-    }
-
-    .caixa-opcoes {
-        width: 580px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .opcao {
-        width: 280px;
-    }
-
-    .opcao img {
-        width: 280px;
-    }
-    
-    .conteudo-resultado img {
-        width: 320px;
-        height: 230px;
-    }
-}
-
-@media(max-width: 620px) {
     .conteiner-quiz {
         margin-bottom: 28;
     }
@@ -451,7 +420,7 @@ body {
     }
     
     .caixa-resultado {
-        width: 100%;
+        width: 408px;
         padding: 28px 34px 15px;
         margin-bottom: 35px;
     }
