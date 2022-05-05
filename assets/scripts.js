@@ -356,7 +356,7 @@ function validacaoNiveis() {
         // title: tituloNivel,
         // image: imagemNivel,
         // text: descricaoNivel,
-        // minValue: porcentagemNivel 
+        // minValue: porcentagemNivel.
 
     for (let i = 1; i <= numeroDeNiveis; i++) {
         const nivel = document.querySelector(`.niveis>div:nth-child(${i})`);
